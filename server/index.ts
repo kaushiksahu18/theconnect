@@ -24,7 +24,8 @@ wss.on("connection", (ws: ExtWebSocket) => {
     return;
   });
 
-  ws.id = randomUUID();
+  const myUUID = randomUUID().split("-")[0];
+  ws.id = myUUID.slice(0, myUUID.length / 2);
   console.log(new Date() + "\tConnection established");
 
   userManager.addUser("user" + usercount++, ws);
@@ -42,7 +43,7 @@ wss.on("connection", (ws: ExtWebSocket) => {
         case "createRoom": {
           console.log(new Date() + ws.id + "\tCreating room");
           const roomID = roomManager.startNewRoom(
-            userManager.getUserById(ws.id)!,
+            userManager.getUserById(ws.id)!
           );
           console.log(new Date() + "\tinside createRoom Roomid:" + roomID);
 
@@ -51,7 +52,7 @@ wss.on("connection", (ws: ExtWebSocket) => {
               status: "Room created",
               roomID,
               isPaired: false,
-            }),
+            })
           );
           break;
         }
@@ -62,19 +63,19 @@ wss.on("connection", (ws: ExtWebSocket) => {
           console.log(
             new Date() +
               "\tinside joinRoom Room:" +
-              JSON.stringify({ u1: room?.user1.name, u2: room?.user2.name }),
+              JSON.stringify({ u1: room?.user1.name, u2: room?.user2.name })
           );
           if (room) {
             const roomID = roomManager.createRoom(
               room.id,
-              userManager.getUserById(ws.id)!,
+              userManager.getUserById(ws.id)!
             );
             ws.send(
               JSON.stringify({
                 status: "Room Joined",
                 roomID,
                 isPaired: true,
-              }),
+              })
             );
           } else {
             ws.send("Room not found");
@@ -87,13 +88,13 @@ wss.on("connection", (ws: ExtWebSocket) => {
           console.log(
             new Date() +
               "\tinside sendMessage ROOM:" +
-              JSON.stringify({ u1: room?.user1.name, u2: room?.user2.name }),
+              JSON.stringify({ u1: room?.user1.name, u2: room?.user2.name })
           );
           const sender = userManager.getUserById(ws.id)!;
           const reciver = room.user1 === sender ? room.user2 : room.user1;
 
           console.log(
-            new Date() + sender.name + "\tSending message to " + reciver.name,
+            new Date() + sender.name + "\tSending message to " + reciver.name
           );
 
           if (sender.isPaired && reciver.isPaired) {
@@ -102,14 +103,14 @@ wss.on("connection", (ws: ExtWebSocket) => {
                 type: "sentMessage",
                 message: `s#${response.message}`,
                 isPaired: true,
-              }),
+              })
             );
             reciver.socket.send(
               JSON.stringify({
                 type: "receiveMessage",
                 message: `r#${response.message}`,
                 isPaired: true,
-              }),
+              })
             );
           }
           break;
@@ -133,7 +134,7 @@ wss.on("connection", (ws: ExtWebSocket) => {
 
 app.get("/", (req, res) => {
   res.send(
-    'The nodejs backend for website <a href="https://theconnect.vercel.app">theConnect</a>',
+    'The nodejs backend for website <a href="https://theconnect.vercel.app">theConnect</a>'
   );
 });
 
