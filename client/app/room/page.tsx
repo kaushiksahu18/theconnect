@@ -6,6 +6,7 @@ import { useSocketStore } from "@/lib/SocketContext";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { MemoizedVortexBackground } from "@/components/VortexBackground";
+import WRTCComponent from "./WRTCComponent";
 
 function RoomPage() {
   const [messages, setMessages] = useState<string[]>([]); // Store chat messages
@@ -55,9 +56,10 @@ function RoomPage() {
     <>
       <MemoizedVortexBackground className="absolute left-0 top-0 h-full w-full" />
       <div className="relative h-screen w-full">
-        <div className="mx-auto w-[95vw] lg:w-[70vw] space-y-8 px-4 py-8">
+        <WRTCComponent />
+        <div className="mx-auto w-[95vw] space-y-8 px-4 py-8 lg:w-[70vw]">
           <h2>Chat</h2>
-          <div className="space-y-1 rounded-lg border-2 border-gray-300 p-2 overflow-y-auto max-h-[70vh]">
+          <div className="max-h-[70vh] space-y-1 overflow-y-auto rounded-lg border-2 border-gray-300 p-2">
             {messages.map((msg, index) => (
               <div
                 className={`flex ${msg.substring(0, 2) === "s#" ? "justify-end" : "justify-start"}`}
@@ -75,7 +77,7 @@ function RoomPage() {
             ))}
           </div>
 
-          <div>
+          <div className="space-y-2">
             <Input
               type="text"
               value={newMessage}
