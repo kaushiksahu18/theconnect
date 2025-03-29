@@ -59,7 +59,7 @@ function WRTCComponent() {
       {isRTC && (
         <div className="flex h-full w-full flex-col items-center justify-center space-y-4">
           <Button onClick={() => setIsRTC(false)}>Switch to Chat Only</Button>
-          <div className="h-full w-full flex-col space-y-4 md:flex md:space-x-4">
+          <div className="flex h-full w-full flex-col items-center justify-center space-y-4 md:flex-row md:space-x-4 md:space-y-0">
             <div className="h-1/2 w-full overflow-hidden rounded-lg border-2 border-white md:h-full md:w-1/2">
               <video
                 className="h-full w-full"
