@@ -34,23 +34,25 @@ export const Hero = () => {
           transition={{ delay: 0.2, duration: 0.8 }}
           className="mb-6 text-4xl font-bold text-white md:text-6xl"
         >
-          Private Peer-to-Peer{" "}
+          Private Peer-to-Peer
           <TextLoop transition={{ duration: 0.4 }} interval={2}>
             <span className="flex items-center gap-2">
-              Voice Calls <Voicemail className="h-10 w-10 md:h-14 md:w-14" />
+              Voice Calls (alpha)
+              <Voicemail className="h-10 w-10 md:h-14 md:w-14" />
             </span>
             <span className="flex items-center gap-2">
               Secure Chat <Send className="h-10 w-10 md:h-14 md:w-14" />
             </span>
             <span className="flex items-center gap-2">
-              Video Calls <Video className="h-10 w-10 md:h-14 md:w-14" />
+              Video Call (alpha)
+              <Video className="h-10 w-10 md:h-14 md:w-14" />
             </span>
             <span className="flex items-center gap-2">
               Secure Chat <Send className="h-10 w-10 md:h-14 md:w-14" />
             </span>
           </TextLoop>
         </motion.h1>
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.8 }}
@@ -63,7 +65,7 @@ export const Hero = () => {
           >
             Experience secure communication with no data stored on servers.
           </TextScramble>
-        </motion.p>
+        </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -211,14 +213,16 @@ export function TextEffectWithCustomVariants({
   };
 
   return (
-    <TextEffect
-      per={per}
-      variants={fancyVariants}
-      className={className}
-      delay={delay}
-    >
-      theConnect
-    </TextEffect>
+    <Link href="/">
+      <TextEffect
+        per={per}
+        variants={fancyVariants}
+        className={className}
+        delay={delay}
+      >
+        theConnect
+      </TextEffect>
+    </Link>
   );
 }
 
