@@ -21,7 +21,8 @@ function RoomPage() {
 
     // Listen for incoming messages
     if (socket.current) {
-      socket.current.onmessage = (event) => {
+      socket.current.addEventListener("message", (event) => {
+        if(event.data === "message") return;
         const data = JSON.parse(event.data);
 
         if (
@@ -33,7 +34,7 @@ function RoomPage() {
             data.message,
           ]);
         }
-      };
+      });
     }
   }, []);
 

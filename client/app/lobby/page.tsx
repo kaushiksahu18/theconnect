@@ -36,7 +36,8 @@ function LobbyPage() {
     socket.current = Socket.getSocket();
 
     if (socket.current) {
-      socket.current.onmessage = (event) => {
+      socket.current.addEventListener("message", (event) => {
+        if(event.data === "message") return;
         const data = JSON.parse(event.data);
         if (data) {
           setStatus(data.status);
@@ -54,7 +55,7 @@ function LobbyPage() {
               break;
           }
         }
-      };
+      });
     }
   }, []);
 
@@ -68,7 +69,7 @@ function LobbyPage() {
     socket.current?.send(
       JSON.stringify({ type: "createRoom", name: username }),
     );
-    console.log("created");
+    //console.log("created");
   };
 
   const handleJoinSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -83,7 +84,7 @@ function LobbyPage() {
           roomID: searchParams.get("join") || roomID.current,
         }),
       );
-      console.log("joined");
+      //console.log("joined");
       return;
     }
 
@@ -94,7 +95,7 @@ function LobbyPage() {
         roomID: roomID.current,
       }),
     );
-    console.log("joined");
+    //console.log("joined");
   };
 
   return (
@@ -251,7 +252,7 @@ function LobbyPage() {
       </motion.div>
       {clickSide !== null && (
         <Button
-          onClick={() => window.location.href = "/lobby"}
+          onClick={() => (window.location.href = "/lobby")}
           className="absolute left-4 top-4 cursor-pointer space-x-2 text-xl text-white"
         >
           <ChevronsLeft />
