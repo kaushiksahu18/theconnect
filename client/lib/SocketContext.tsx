@@ -2,7 +2,8 @@
 
 import { create } from "zustand";
 
-const WEBSOCKET_URI = "wss://theconnect-fa2u.onrender.com/";
+const WEBSOCKET_URI = "wss://theconnect-fu5n.onrender.com/";
+//const WEBSOCKET_URI = "wss://theconnect-fa2u.onrender.com/";
 // const WEBSOCKET_URI = "ws://localhost:6969";
 
 interface Store {
