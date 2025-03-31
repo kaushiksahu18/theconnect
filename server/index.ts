@@ -187,14 +187,6 @@ app.get("/", (req, res) => {
     );
 });
 
-// app.get("/rooms", (req, res) => {
-//   res.send(JSON.stringify(roomManager.getRooms()));
-// });
-
-// app.get("/users", (req, res) => {
-//   res.send(JSON.stringify(userManager.getUsers()));
-// });
-
 // Server listening
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
